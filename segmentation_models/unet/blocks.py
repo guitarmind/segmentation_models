@@ -5,7 +5,7 @@ from keras.layers import BatchNormalization
 from keras.layers import Activation
 from keras.layers import Concatenate
 
-from .classification_models.classification_models.se import squeeze_excite_block
+from ..backbones.classification_models.classification_models.se import squeeze_excite_block
 
 
 def handle_block_names(stage):
