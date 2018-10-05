@@ -26,6 +26,7 @@ def Unet(backbone_name='vgg16',
          input_tensor=None,
          encoder_weights='imagenet',
          freeze_encoder=False,
+         pretrain_weights=True,
          skip_connections='default',
          decoder_block_type='upsampling',
          decoder_filters=(256,128,64,32,16),
@@ -42,6 +43,7 @@ def Unet(backbone_name='vgg16',
         input_tensor: keras tensor
         encoder_weights: one of `None` (random initialization), 'imagenet' (pre-training on ImageNet)
         freeze_encoder: (bool) Set encoder layers weights as non-trainable. Useful for fine-tuning
+        pretrain_weights: (bool) Set whether to include pretrain weights
         skip_connections: if 'default' is used take default skip connections,
             else provide a list of layer numbers or names starting from top of model
         decoder_block_type: (str) one of 'upsampling' and 'transpose' (look at blocks.py)
@@ -63,6 +65,7 @@ def Unet(backbone_name='vgg16',
                             input_shape=input_shape,
                             input_tensor=input_tensor,
                             weights=encoder_weights,
+                            pretrain_weights=pretrain_weights,
                             include_top=False)
 
     if skip_connections == 'default':

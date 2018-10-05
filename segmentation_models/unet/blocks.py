@@ -5,7 +5,7 @@ from keras.layers import BatchNormalization
 from keras.layers import Activation
 from keras.layers import Concatenate
 
-from ..backbones.classification_models.classification_models.se import squeeze_excite_block
+from ..backbones.classification_models.classification_models.se import csse_block
 
 
 def handle_block_names(stage):
@@ -44,8 +44,8 @@ def Upsample2D_block(filters, stage, kernel_size=(3,3), upsample_rate=(2,2),
         x = ConvRelu(filters, kernel_size, use_batchnorm=use_batchnorm,
                      conv_name=conv_name + '2', bn_name=bn_name + '2', relu_name=relu_name + '2')(x)
 
-        # squeeze and excite block
-        x = squeeze_excite_block(x)
+        # scSE block
+        x = csse_block(x)
 
         return x
     return layer
@@ -70,8 +70,8 @@ def Transpose2D_block(filters, stage, kernel_size=(3,3), upsample_rate=(2,2),
         x = ConvRelu(filters, kernel_size, use_batchnorm=use_batchnorm,
                      conv_name=conv_name + '2', bn_name=bn_name + '2', relu_name=relu_name + '2')(x)
 
-        # squeeze and excite block
-        x = squeeze_excite_block(x)
+        # scSE block
+        x = csse_block(x)
 
         return x
     return layer
